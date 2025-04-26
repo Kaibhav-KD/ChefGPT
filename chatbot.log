@@ -1,0 +1,93 @@
+2025-04-26 01:54:17,773 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 01:54:17,774 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 01:54:18,166 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-26 01:54:18,166 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-26 01:54:18,191 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 01:54:22,428 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 01:54:22,430 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 01:54:22,877 - WARNING -  * Debugger is active!
+2025-04-26 01:54:22,881 - INFO -  * Debugger PIN: 138-697-500
+2025-04-26 01:54:32,117 - INFO - 127.0.0.1 - - [26/Apr/2025 01:54:32] "GET / HTTP/1.1" 200 -
+2025-04-26 01:55:46,142 - INFO - 127.0.0.1 - - [26/Apr/2025 01:55:46] "POST /chat HTTP/1.1" 200 -
+2025-04-26 01:56:26,329 - INFO - 127.0.0.1 - - [26/Apr/2025 01:56:26] "[33mGET /static/activate.mp3 HTTP/1.1[0m" 404 -
+2025-04-26 01:56:34,629 - INFO - 127.0.0.1 - - [26/Apr/2025 01:56:34] "POST /chat2 HTTP/1.1" 200 -
+2025-04-26 01:57:14,411 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 01:57:14,416 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 01:57:23,269 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 01:58:39,031 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 01:58:39,032 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 01:58:39,432 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-26 01:58:39,433 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-26 01:58:39,458 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 01:58:42,573 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 01:58:42,575 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 01:58:42,938 - WARNING -  * Debugger is active!
+2025-04-26 01:58:42,942 - INFO -  * Debugger PIN: 138-697-500
+2025-04-26 01:58:46,493 - INFO - 127.0.0.1 - - [26/Apr/2025 01:58:46] "GET / HTTP/1.1" 200 -
+2025-04-26 01:59:44,270 - INFO - 127.0.0.1 - - [26/Apr/2025 01:59:44] "POST /chat HTTP/1.1" 200 -
+2025-04-26 02:00:04,634 - INFO - 127.0.0.1 - - [26/Apr/2025 02:00:04] "GET / HTTP/1.1" 200 -
+2025-04-26 02:00:06,168 - INFO - 127.0.0.1 - - [26/Apr/2025 02:00:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-26 02:06:19,906 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 02:06:19,913 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 02:06:22,415 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 02:06:27,611 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:06:27,615 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:06:28,108 - WARNING -  * Debugger is active!
+2025-04-26 02:06:28,113 - INFO -  * Debugger PIN: 138-697-500
+2025-04-26 02:06:35,498 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:06:35,500 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:08:08,422 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:08:09,107 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:08:09,520 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-26 02:08:09,521 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-26 02:08:09,550 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 02:08:12,105 - INFO - 127.0.0.1 - - [26/Apr/2025 02:08:12] "GET / HTTP/1.1" 200 -
+2025-04-26 02:08:16,266 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:08:16,267 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:08:16,627 - WARNING -  * Debugger is active!
+2025-04-26 02:08:16,631 - INFO -  * Debugger PIN: 138-697-500
+2025-04-26 02:10:32,570 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 02:10:32,575 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 02:10:32,577 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 02:10:34,004 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 02:10:37,924 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:10:37,926 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:10:38,329 - WARNING -  * Debugger is active!
+2025-04-26 02:10:38,335 - INFO -  * Debugger PIN: 138-697-500
+2025-04-26 02:10:39,368 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 02:10:39,374 - INFO -  * Detected change in 'D:\\Final_project_the_hackathon\\ChatBotv2\\chatbot1.py', reloading
+2025-04-26 02:10:40,261 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 02:10:44,826 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:10:44,827 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:10:45,317 - WARNING -  * Debugger is active!
+2025-04-26 02:10:45,322 - INFO -  * Debugger PIN: 138-697-500
+2025-04-26 02:11:03,060 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:11:03,061 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:15:29,037 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:15:29,039 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:30:30,905 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:30:30,906 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:30:31,348 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-26 02:30:31,349 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-26 02:30:31,387 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 02:30:39,546 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 02:30:39,552 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 02:30:40,202 - WARNING -  * Debugger is active!
+2025-04-26 02:30:40,211 - INFO -  * Debugger PIN: 138-697-500
+2025-04-26 02:30:40,311 - INFO - 127.0.0.1 - - [26/Apr/2025 02:30:40] "GET / HTTP/1.1" 200 -
+2025-04-26 02:30:41,279 - INFO - 127.0.0.1 - - [26/Apr/2025 02:30:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-26 03:33:20,425 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 03:33:20,427 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 03:33:20,819 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-26 03:33:20,820 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-26 03:33:20,846 - INFO -  * Restarting with watchdog (windowsapi)
+2025-04-26 03:33:25,548 - INFO - Imported existing <module 'comtypes.gen' from 'K:\\python download\\main  py download\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-04-26 03:33:25,549 - INFO - Using writeable comtypes cache directory: 'K:\python download\main  py download\Lib\site-packages\comtypes\gen'
+2025-04-26 03:33:26,032 - WARNING -  * Debugger is active!
+2025-04-26 03:33:26,038 - INFO -  * Debugger PIN: 138-697-500
+2025-04-26 03:33:26,107 - INFO - 127.0.0.1 - - [26/Apr/2025 03:33:26] "GET / HTTP/1.1" 200 -
