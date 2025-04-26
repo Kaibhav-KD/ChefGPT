@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CulinaryAI - Your Magical Recipe Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --secondary: #06B6D4;
+            --accent: #F43F5E;
+            --dark-bg: #09090B;
+            --dark-surface: #18181B;
+            --text-primary: #FAFAFA;
+            --text-secondary: #A1A1AA;
+            --success: #10B981;
+            --error: #EF4444;
+            --gradient-1: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
+            --gradient-2: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);
+            --gradient-3: linear-gradient(135deg, #F43F5E 0%, #FB923C 100%);
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1A1A1A 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+            height: 100vh;
+        }
+
+        .sidebar {
+            background: rgba(24, 24, 27, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            text-align: center;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .feature-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateX(5px);
+        }
+
+        .feature-item i {
+            font-size: 1.25rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .chat-container {
+            background: rgba(24, 24, 27, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(24, 24, 27, 0.95);
+        }
+
+        .chat-header .status {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--success);
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .message {
+            max-width: 80%;
+            animation: messageSlide 0.3s ease-out;
+        }
+
+        .user-message {
+            margin-left: auto;
+        }
+
+        .message-content {
+            padding: 1.25rem 1.5rem;
+            border-radius: 16px;
+            position: relative;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+        .user-message .message-content {
+            background: var(--gradient-1);
+            color: white;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .bot-message .message-content {
+            background: rgba(24, 24, 27, 0.95);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-bottom-left-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .recipe-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .recipe-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-section {
+            margin-bottom: 2rem;
+        }
+
+        .recipe-section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .recipe-section-title i {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .recipe-list {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .recipe-list li {
+            position: relative;
+            padding: 0.75rem 0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .recipe-list li::before {
+            content: '•';
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: absolute;
+            left: -1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .recipe-tip {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.1) 0%, rgba(251, 146, 60, 0.1) 100%);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .recipe-tip i {
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 0.75rem;
+        }
+
+        .input-container {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            display: flex;
+            gap: 1rem;
+            background: rgba(24, 24, 27, 0.95);
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .send-button {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: rgba(24, 24, 27, 0.95);
+            border-radius: 16px;
+            width: fit-content;
+            margin-bottom: 1rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+            animation: typingBounce 1s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+            transform: translateY(0);
+            }
+        }
+
+        @keyframes typingBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Scrollbar styling */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        /* Voice Input Styles */
+        .voice-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .voice-input-button {
+            position: relative;
+            background: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .voice-input-button::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .voice-input-button:hover::before {
+            opacity: 0.5;
+        }
+
+        .voice-input-button.listening {
+            animation: pulseAnimation 2s infinite;
+            background: linear-gradient(135deg, #EF4444 0%, #F43F5E 100%);
+        }
+
+        .voice-input-button.listening::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 18px;
+            border: 2px solid #EF4444;
+            animation: ripple 1.5s infinite;
+        }
+
+        .voice-input-button i {
+            font-size: 1.25rem;
+        }
+
+        .voice-feedback {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(24, 24, 27, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 1rem 2rem;
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .voice-feedback.active {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .voice-feedback.error {
+            border-color: #EF4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .voice-feedback.success {
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        @keyframes pulseAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from {
+            opacity: 0;
+                transform: translate(-50%, 20px);
+        }
+            to {
+            opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Voice status indicator */
+        .voice-status {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(24, 24, 27, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            display: none; /* Hide the status bar by default */
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .voice-status.listening {
+            border-color: rgba(239, 68, 68, 0.4);
+            background: rgba(24, 24, 27, 0.98);
+        }
+
+        .voice-status i {
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .voice-status.listening i {
+            background: linear-gradient(135deg, #EF4444 0%, #F43F5E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseAnimation 2s infinite;
+        }
+
+        /* Add styles for nutrition section */
+        .nutrition-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .nutrition-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Style for preserving formatting in messages */
+        .preserve-format {
+            white-space: pre-wrap;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        /* Voice Input Enhanced Styles */
+        .voice-wave-animation {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-right: 10px;
+        }
+
+        .wave {
+            width: 3px;
+            height: 15px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
+            border-radius: 10px;
+            animation: wave 1s infinite;
+        }
+
+        .wave:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .wave:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 5px; }
+            50% { height: 15px; }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1 class="text-4xl font-bold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">
+                    CulinaryAI
+            </h1>
+                <p class="text-gray-400 mt-2">Your Magical Recipe Assistant</p>
+                    </div>
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    <span>Recipe Generation</span>
+                </li>
+                <li class="feature-item">
+                    <i class="fas fa-carrot"></i>
+                    <span>Ingredient Substitutes</span>
+                </li>
+                <li class="feature-item">
+                            <i class="fas fa-clock"></i>
+                    <span>Cooking Times</span>
+                </li>
+                <li class="feature-item">
+                    <i class="fas fa-fire-flame-curved"></i>
+                    <span>Cooking Techniques</span>
+                </li>
+                <li class="feature-item">
+                    <i class="fas fa-heart-pulse"></i>
+                    <span>Nutritional Info</span>
+                </li>
+            </ul>
+            <div class="mt-auto text-center text-sm text-gray-400">
+                <p>Powered by Advanced AI</p>
+                <p>Made with 💜 for cooking</p>
+                        </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="status"></div>
+                    <h2 class="font-semibold">ChefGPT/h2>
+                    <span class="text-sm text-gray-400">Online & Ready</span>
+                    </div>
+
+                <div class="chat-messages" id="chatBox">
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            <p>{{ greeting }}! I'm your personal ChefGPT. ✨</p>
+                            <p class="mt-2">How can I help you create something magical today?</p>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    
+            <form id="chatForm" class="input-container">
+                <div class="voice-input-container">
+                    <button type="button" 
+                            id="voiceInputButton" 
+                            class="voice-input-button" 
+                            title="Click to use voice input">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div class="voice-tooltip">Click to speak</div>
+                </div>
+                <input type="text" 
+                       id="userInput" 
+                       class="chat-input"
+                       placeholder="Ask me about any recipe or cooking technique..."
+                       autocomplete="off">
+                <button type="submit" class="send-button">
+                    <span>Send</span>
+                    <i class="fas fa-paper-plane"></i>
+                        </button>
+            </form>
+        </main>
+    </div>
+
+    <!-- Voice Feedback Modal -->
+    <div id="voiceFeedback" class="voice-feedback">
+        <i class="fas fa-microphone"></i>
+        <span id="voiceFeedbackText">Listening...</span>
+    </div>
+
+    <!-- Voice Status with Animation -->
+    <div class="voice-status">
+        <div class="voice-wave-animation">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            </div>
+        <i class="fas fa-microphone"></i>
+        <span class="voice-status-text">Say "Chef" or "बोलो" to activate</span>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chatBox');
+        const chatForm = document.getElementById('chatForm');
+        const userInput = document.getElementById('userInput');
+        const voiceStatus = document.querySelector('.voice-status');
+        const voiceStatusText = document.querySelector('.voice-status-text');
+        let isListening = false;
+        let recognition = null;
+
+        // Enhanced Voice Recognition Setup
+        function setupVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                console.error('Speech Recognition not supported');
+                document.querySelector('.voice-input-container').style.display = 'none';
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            const voiceButton = document.getElementById('voiceInputButton');
+            const userInput = document.getElementById('userInput');
+            const voiceFeedback = document.getElementById('voiceFeedback');
+            let isListening = false;
+            let timeoutId = null;
+
+            // Configure recognition
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-IN'; // Support for Indian English and Hindi
+
+            // Activation keywords
+            const activationKeywords = ['chef', 'बोलो', 'recipe', 'रेसिपी'];
+
+            function showFeedback(message, type = 'normal') {
+                voiceFeedback.className = `voice-feedback active ${type}`;
+                voiceFeedback.innerHTML = `
+                    <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 
+                                     type === 'success' ? 'check-circle' : 'microphone'}"></i>
+                    <span>${message}</span>
+                `;
+                
+                if (timeoutId) clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    voiceFeedback.classList.remove('active');
+                }, 3000);
+            }
+
+            function startListening() {
+                try {
+                    recognition.start();
+                    isListening = true;
+                    voiceButton.classList.add('listening');
+                    showFeedback('Listening... Speak your recipe request');
+            } catch (error) {
+                    console.error('Error starting recognition:', error);
+                    showFeedback('Error starting voice recognition', 'error');
+                }
+            }
+
+            function stopListening() {
+                try {
+                    recognition.stop();
+                    isListening = false;
+                    voiceButton.classList.remove('listening');
+                    showFeedback('Voice input stopped', 'success');
+                } catch (error) {
+                    console.error('Error stopping recognition:', error);
+                }
+            }
+
+            // Handle recognition results
+            recognition.onresult = (event) => {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0].transcript.toLowerCase())
+                    .join(' ');
+
+                // Check for activation keywords
+                if (!isListening && activationKeywords.some(keyword => transcript.includes(keyword))) {
+                    startListening();
+                    showFeedback('Activated! What recipe would you like to know?');
+                    return;
+                }
+
+                if (isListening) {
+                    userInput.value = transcript;
+                    
+                    // Auto-submit if the user has finished speaking
+                    if (event.results[event.results.length - 1].isFinal) {
+                        if (transcript.includes('stop') || transcript.includes('रुको')) {
+                            stopListening();
+                            return;
+                        }
+                        
+                        showFeedback('Processing your request...', 'success');
+                        setTimeout(() => {
+                            document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+                            stopListening();
+                        }, 1000);
+                    }
+                }
+            };
+
+            recognition.onstart = () => {
+                console.log('Voice recognition started');
+                voiceButton.classList.add('listening');
+            };
+
+            recognition.onend = () => {
+                console.log('Voice recognition ended');
+                isListening = false;
+                voiceButton.classList.remove('listening');
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Recognition error:', event.error);
+                showFeedback(`Error: ${event.error}. Please try again.`, 'error');
+                stopListening();
+            };
+
+            // Button click handler
+            voiceButton.addEventListener('click', () => {
+                if (isListening) {
+                    stopListening();
+                } else {
+                    startListening();
+                }
+            });
+
+            // Start background listening for activation keywords
+            try {
+                recognition.start();
+                } catch (error) {
+                console.error('Error starting background recognition:', error);
+            }
+        }
+
+        // Initialize voice recognition on page load
+        window.addEventListener('load', setupVoiceRecognition);
+
+        chatForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            
+            if (!message) return;
+
+            addMessage(message, true);
+            userInput.value = '';
+
+            const typingIndicator = addTypingIndicator();
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        user_name: 'Guest'
+                    })
+                });
+                
+                const data = await response.json();
+                typingIndicator.remove();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                addMessage(data.response);
+            } catch (error) {
+                console.error('Error:', error);
+                typingIndicator.remove();
+                addMessage('Sorry, there was an error processing your request. Please try again.');
+            }
+        });
+
+        function addTypingIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            chatBox.appendChild(indicator);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return indicator;
+        }
+
+        function appendMessage(message, isUser = false) {
+            const messagesContainer = document.querySelector('.chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content preserve-format';
+            
+            // Preserve formatting for bot messages
+            if (!isUser) {
+                contentDiv.style.whiteSpace = 'pre-wrap';
+                // Replace emoji placeholders with actual emojis
+                message = message.replace(/⏱️/g, '⏱️')
+                               .replace(/🥘/g, '🥘')
+                               .replace(/📝/g, '📝')
+                               .replace(/💡/g, '💡')
+                               .replace(/⚡/g, '⚡')
+                               .replace(/📊/g, '📊')
+                               .replace(/❤️/g, '❤️')
+                               .replace(/🦴/g, '🦴');
+            }
+            
+            contentDiv.textContent = message;
+            messageDiv.appendChild(contentDiv);
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Clear input
+            input.value = '';
+            
+            // Append user message
+            appendMessage(message, true);
+            
+            try {
+                // Show loading indicator
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'message bot-message loading';
+                loadingDiv.innerHTML = '<div class="message-content">Thinking...</div>';
+                document.querySelector('.chat-messages').appendChild(loadingDiv);
+                
+                // Send request to server
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message })
+                });
+
+                const data = await response.json();
+                
+                // Remove loading indicator
+                loadingDiv.remove();
+
+                if (data.error) {
+                    appendMessage('Sorry, an error occurred. Please try again.');
+                } else {
+                    // Append bot response with preserved formatting
+                    appendMessage(data.response);
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage('Sorry, an error occurred. Please try again.');
+            }
+        }
+
+        // Handle Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
